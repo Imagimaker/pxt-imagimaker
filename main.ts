@@ -484,9 +484,4 @@ namespace magibit {
     }
     return 0;
   }
-
-  //% block
-  export function hi () {
-    
-  }
 }
