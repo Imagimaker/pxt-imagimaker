@@ -280,7 +280,7 @@ namespace magibit {
     if (distance <= 8.5) {
         distance = distance * (distance / 12) ;
     }
-    distance = distance.toPrecision(3); 
+    distance = distance.toFixed(3);
     return distance ;
   }
 
