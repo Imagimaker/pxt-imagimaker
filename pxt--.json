@@ -1,0 +1,15 @@
+{
+    "name": "Magibit",
+    "version": "18.813.16",
+    "description": "Magibit package for Micro:bit",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "minode": "github:lucas1677/pxt-minode#"
+    },
+    "files": [
+        "README.md",
+        "main.ts"
+    ],
+    "public": true
+}
