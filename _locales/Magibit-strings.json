@@ -1,0 +1,20 @@
+{
+  "magibit.InfraredSensorReadValue|block": "👀infrared read digital at |%pin|",
+  "magibit.MotorSpeedSensorReadValue|block": "⏱Motor speed read digital at |%pin|",
+  "magibit.SoilSensorReadValue|block": "💧Soil moisture read analog at |%pin|",
+  "magibit.SoundSensorReadValue|block": "🔊Sound read analog at |%pin|",
+  "magibit.UltrasonicReadValue|block": "📡Read ultrasonic(cm) at |%pin|",
+  "magibit.airHumidityReadValue|block": "🌡Read air humidity(%) at |%pin|",
+  "magibit.airTemperatureReadValue|block": "🌡Read air temperature(°C) at |%pin|",
+  "magibit.joystickReadButtonStateValue|block": "🕹Joystick |%joystick| is pressed",
+  "magibit.joystickReadXValue|block": "🕹Position of joystick, x-axis |%joystick|",
+  "magibit.joystickReadYValue|block": "🕹Position of joystick, y-axis |%joystick|",
+  "magibit.ledSetBrightness|block": "💡LED |%pin| set brightness |%brightness|",
+  "magibit.ledSetOnOff|block": "💡LED |%pin| |%state|",
+  "magibit.lightSensorReadValue|block": "🔆Light level read analog at |%pin|",
+  "magibit.motorSetSpeed|block": "Motor |%motor| running with direction |%direction| and speed |%speed|",
+  "magibit.motorStopAll|block": "Motor stop all",
+  "magibit.potentiometerReadValue|block": "🎚Potentiometer read analog at |%pin|",
+  "magibit|block": "Magibit",
+  "{id:category}Magibit": "Magibit"
+}

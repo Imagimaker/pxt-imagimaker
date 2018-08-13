@@ -1,0 +1,20 @@
+{
+  "magibit.InfraredSensorReadValue|block": "👀巡线传感器的数字值 at |%pin|",
+  "magibit.MotorSpeedSensorReadValue|block": "⏱测速传感器的数字值 at |%pin|",
+  "magibit.SoilSensorReadValue|block": "💧土壤湿度的模拟值 at |%pin|",
+  "magibit.SoundSensorReadValue|block": "🔊声音大小的模拟值 at |%pin|",
+  "magibit.UltrasonicReadValue|block":"📡超声波(cm) at |%pin|",
+  "magibit.airHumidityReadValue|block": "🌡空气湿度（%） at |%pin|",
+  "magibit.airTemperatureReadValue|block": "🌡空气温度（℃） at |%pin|",
+  "magibit.joystickReadButtonStateValue|block": "🕹当摇杆 |%joystick| 被按下",
+  "magibit.joystickReadXValue|block": "🕹摇杆X轴的位置 at |%joystick|",
+  "magibit.joystickReadYValue|block": "🕹摇杆Y轴的位置 |%joystick|",
+  "magibit.ledSetBrightness|block": "💡LED灯 |%pin| 设置亮度为 |%brightness|",
+  "magibit.ledSetOnOff|block": "💡LED |%pin| |%state|",
+  "magibit.lightSensorReadValue|block": "🔆光线强度的模拟值 at |%pin|",
+  "magibit.motorSetSpeed|block": "电机 |%motor| 方向 |%direction| 速度 |%speed|",
+  "magibit.motorStopAll|block": "所有电机停止转动",
+  "magibit.potentiometerReadValue|block": "🎚电位器旋转位置的模拟值 at |%pin|",
+  "magibit|block": "麦极创客",
+  "{id:category}Magibit": "麦极创客"
+}
