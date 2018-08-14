@@ -260,11 +260,11 @@ namespace magibit {
     // 获取超声波模块，上一个周期中高电平的时间
     function getTime() {
         data = 0 ;
-        while (pins.digitalReadPin(pin) == 0) {
+        while (pins.digitalReadPin(DigitalPin.P0) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(pin) == 1 && data < 27400) {
+        while (pins.digitalReadPin(DigitalPin.P0) == 1 && data < 27400) {
             time_end = input.runningTimeMicros() ;
             data = time_end - time_begin ;
         }
@@ -272,7 +272,7 @@ namespace magibit {
 
     getTime() ;
     // 将高电平时间转化为距离（单位为cm）
-    distance = data * 0.015 ;
+    distance = data * 15 / 1000 ;
     // 针对不同区间段的数据，做对应的数据处理
     if (distance > 8.5 && distance < 10) {
         distance = distance * (distance / 10) ;
