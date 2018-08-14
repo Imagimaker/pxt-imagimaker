@@ -260,11 +260,11 @@ namespace magibit {
     // 获取超声波模块，上一个周期中高电平的时间
     function getTime() {
         data = 0 ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 0) {
+        while (pins.digitalReadPin(pin) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 1 && data < 27400) {
+        while (pins.digitalReadPin(pin) == 1 && data < 27400) {
             time_end = input.runningTimeMicros() ;
             data = time_end - time_begin ;
         }
