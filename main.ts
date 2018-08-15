@@ -272,13 +272,13 @@ namespace magibit {
     let digPin: number ;
     switch (pin) {
       case UltrasonicSensorPins.P0:
-        digPin=UltrasonicSensorPins.P0;
+        digPin=DigitalPin.P0;
         break;
       case UltrasonicSensorPins.P1:
-        digPin=UltrasonicSensorPins.P1;
+        digPin=DigitalPin.P1;
         break;
       case UltrasonicSensorPins.P2:
-        digPin=UltrasonicSensorPins.P2;
+        digPin=DigitalPin.P2;
         break;
     }
 
