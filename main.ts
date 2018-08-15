@@ -269,7 +269,7 @@ namespace magibit {
     let totData: number = 0 ;
     let avrData: number=0;
 
-    let digPin ;
+    let digPin: number ;
     switch (pin) {
       case UltrasonicSensorPins.P0:
         digPin=UltrasonicSensorPins.P0;
