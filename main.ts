@@ -64,9 +64,11 @@ namespace magibit {
   }
 
   export enum SampleTimes {
-   //% block=
+    //% blockId="OneTime" block="OneTime"
     OneTime=1,
+    //% blockId="ThreeTimes" block="ThreeTimes"
     ThreeTimes=3,
+    //% blockId="SevenTimes" block="SevenTimes"
     SevenTimes=7
   } 
 
