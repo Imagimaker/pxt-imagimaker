@@ -257,10 +257,9 @@ namespace magibit {
    * @return number returns ultrasonic range from 4-50cm. 
    */
   //% blockId=ultrasonic_sensor_range_read
-  //% block="📡Read ultrasonic(cm) at %pin| "
+  //% block="📡Ultrasonic read distance(cm) at %pin| "
   //% blockGap=16
   //% weight=73
-
   export function UltrasonicReadValue(pin: UltrasonicSensorPins ): number {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
