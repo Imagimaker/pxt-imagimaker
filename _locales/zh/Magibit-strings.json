@@ -3,7 +3,7 @@
   "magibit.MotorSpeedSensorReadValue|block": "⏱测速传感器模块数据输出在 |%pin|",
   "magibit.SoilSensorReadValue|block": "💧土壤湿度传感器模块数据输出在 |%pin|",
   "magibit.SoundSensorReadValue|block": "🔊声音传感器模块数据输出在 |%pin|",
-  "magibit.UltrasonicReadValue|block":"📡超声波(cm)传感器模块数据输出在 |%pin| ,设置采样次数为 %times",
+  "magibit.UltrasonicReadValue|block":"📡超声波(cm)传感器模块数据输出在 |%pin|",
   "magibit.airHumidityReadValue|block": "🌡空气湿度（%） 传感器模块数据输出在 |%pin|",
   "magibit.airTemperatureReadValue|block": "🌡空气温度（℃） 传感器模块数据输出在 |%pin|",
   "magibit.joystickReadButtonStateValue|block": "🕹当摇杆 |%joystick| 被按下",

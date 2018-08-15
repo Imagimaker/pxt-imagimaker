@@ -9,7 +9,7 @@
   "magibit.SoilSensorReadValue|param|pin": "sensor's active pin",
   "magibit.SoundSensorReadValue": "read sound sensor's value\r\r\n@return number returns analog value from 0 to 1023",
   "magibit.SoundSensorReadValue|param|pin": "sensor's active pin",
-  "magibit.UltrasonicReadValue": "read Ultrasonic sensor's value\r\r\n@return number returns ultrasonic range from 4-50cm. \r\nwhen sample times is set greater than one time,that means the distance that ultrasonic module detected is the avarage value",
+  "magibit.UltrasonicReadValue": "read Ultrasonic sensor's value\r\r\n@return number returns ultrasonic range from 4-50cm. \r\n",
   "magibit.UltrasonicReadValue|param|pin": "sensor's active pin",
   "magibit.airHumidityReadValue": "read air humidity sensor's value\r\r\n@return number returns analog value from 0 to 1023",
   "magibit.airHumidityReadValue|param|pin": "sensor's active pin",

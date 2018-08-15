@@ -255,18 +255,17 @@ namespace magibit {
    * read Ultrasonic sensor's value
    * @param pin sensor's active pin
    * @return number returns ultrasonic range from 4-50cm. 
-   * when sample times is set greater than one time,that means the distance that ultrasonic module detected is the avarage value
    */
   //% blockId=ultrasonic_sensor_range_read
-  //% block="📡Read ultrasonic(cm) at %pin| and set sample times %times"
+  //% block="📡Read ultrasonic(cm) at %pin| "
   //% blockGap=16
   //% weight=73
 
-  export function UltrasonicReadValue(pin: UltrasonicSensorPins, times:SampleTimes): number {
+  export function UltrasonicReadValue(pin: UltrasonicSensorPins ): number {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
     let distance: number = 0 ;
-
+    let times=1;
     let totData: number = 0 ;
     let avrData: number=0;
 

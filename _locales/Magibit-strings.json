@@ -6,7 +6,7 @@
   "magibit.SampleTimes.ThreeTimes|block": "ThreeTimes",
   "magibit.SoilSensorReadValue|block": "💧Soil moisture read analog at |%pin|",
   "magibit.SoundSensorReadValue|block": "🔊Sound read analog at |%pin|",
-  "magibit.UltrasonicReadValue|block": "📡Read ultrasonic(cm) at %pin| and set sample times %times",
+  "magibit.UltrasonicReadValue|block": "📡Read ultrasonic(cm) at %pin|",
   "magibit.airHumidityReadValue|block": "🌡Read air humidity(%) at |%pin|",
   "magibit.airTemperatureReadValue|block": "🌡Read air temperature(°C) at |%pin|",
   "magibit.joystickReadButtonStateValue|block": "🕹Joystick |%joystick| is pressed",
