@@ -1,6 +1,6 @@
 {
     "name": "Magibit",
-    "version": "18.815.1950",
+    "version": "18.815.2042",
     "description": "Magibit package for Micro:bit",
     "license": "MIT",
     "dependencies": {
@@ -10,7 +10,8 @@
     "files": [
         "README.md",
         "main.ts",
-        "_locales/zh/Magibit-strings.json"
+        "_locales/zh/Magibit-strings.json",
+        "_locales/zh/Magibit-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"
