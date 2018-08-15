@@ -63,6 +63,13 @@ namespace magibit {
     P2
   }
 
+  export enum SampleTimes {
+   //% block=
+    OneTime=1,
+    ThreeTimes=3,
+    SevenTimes=7
+  } 
+
   export enum AirSensorPins {
     P0,
     P1,
@@ -248,40 +255,106 @@ namespace magibit {
    * @return number returns ultrasonic range from 3-400cm. It's only used with seeedstudio's ultrasonic grove module.
    */
   //% blockId=ultrasonic_sensor_range_read
-  //% block="📡Read ultrasonic(cm) at |%pin|"
+  //% block="📡Read ultrasonic(cm) at %pin| and set sample times %times"
   //% blockGap=16
   //% weight=73
 
-  export function UltrasonicReadValue(pin: UltrasonicSensorPins): number {
-    let time_end = 0 ;
-    let time_begin = 0 ;
-    let distance = 0 ;
-    let data = 0 ;
+  export function UltrasonicReadValue(pin: UltrasonicSensorPins, times:SampleTimes): number {
+    let time_end: number = 0 ;
+    let time_begin: number = 0 ;
+    let distance: number = 0 ;
+
+    let totData: number = 0 ;
+    let avrData: number=0;
     // 获取超声波模块，上一个周期中高电平的时间
-    function getTime() {
-        data = 0 ;
+    function getTimestemp() {
+        let timestemp = 0;
+        let time_end = 0 ;
+        let time_begin = 0 ;
         while (pins.digitalReadPin(DigitalPin.P0) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 1 && data < 27400) {
-            time_end = input.runningTimeMicros() ;
-            data = time_end - time_begin ;
+        while (pins.digitalReadPin(DigitalPin.P0) == 1 && timestemp < 60000) {
+            time_end = input.runningTimeMicros() ;            
         }
+        timestemp = time_end - time_begin ;
+        return timestemp;
     }
+    for (let i=0;i<times;i++){
+      totData+=getTimestemp();
+    }
+    avrData=totData/times;
 
-    getTime() ;
-    // 将高电平时间转化为距离（单位为cm）
-    distance = data * 15 / 1000 ;
-    // 针对不同区间段的数据，做对应的数据处理
-    if (distance > 8.5 && distance < 10) {
-        distance = distance * (distance / 10) ;
+    const table1: number[]=[200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,200,
+                          200,200,200,200,207
+                          ];
+
+    const table2: number[]=[236,241,247,265,280,
+                          290,294,298,301,304,
+                          306,323,324,325,325,
+                          325,325,325,325,325,
+                          325,335,345,353,357
+                          ];
+
+    const table3: number[]=[360,365,366,368,370,
+                          372,374,376,378,380,
+                          381,382,384,386,387,
+                          387,387,388,388,388,
+                          389,389,390,390,391
+                          ];
+
+    const table4: number[]=[392,393,393,394,394,
+                          395,395,396,396,397,
+                          397,398,398,399,400,
+                          401,402,403,404,405,
+                          406,407,408,409,409
+                          ];
+
+    const table5: number[]=[410,410,411,411,412,
+                          412,413,413,414,414,
+                          415,415,416,416,417,
+                          417,418,419,420,420,
+                          420,421,421,421,421
+                          ];
+    //20 per step
+    const table6: number[]=[422,422,422,422,423,
+                          423,423,423,424,424,
+                          424,424,425,425,425,
+                          425,426,426,426,426,
+                          427,427,427,427,427
+                          ];
+    let table: number[];
+    let tableIndex: number = avrData/20;
+    if (tableIndex<25&&tableIndex>0) {
+      table= table1;
     } 
-    if (distance <= 8.5) {
-        distance = distance * (distance / 12) ;
+    if(tableIndex<50&&tableIndex>=25) {
+      table= table2;
     }
-    distance = Math.round(distance*1000)/1000;
-    return distance ;
+    if(tableIndex<75&&tableIndex>=50) {
+      table= table3;
+    } 
+    if(tableIndex<100&&tableIndex>=75) {
+      table= table4;
+    } 
+    if(tableIndex<125&&tableIndex>=100) {
+      table= table5;
+    } 
+    if(tableIndex>=125) {
+      table= table6;
+    } 
+   
+    let tableCnt: number = Math.round(tableIndex%25);
+    let velocity: number = table[tableCnt];
+
+     //转换成厘米
+    distance = velocity *  avrData / 20000 ;
+      return distance;
+
   }
 
 
