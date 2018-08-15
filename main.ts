@@ -268,16 +268,30 @@ namespace magibit {
 
     let totData: number = 0 ;
     let avrData: number=0;
+
+    let digPin ;
+    switch (pin) {
+      case UltrasonicSensorPins.P0:
+        digPin=UltrasonicSensorPins.P0;
+        break;
+      case UltrasonicSensorPins.P1:
+        digPin=UltrasonicSensorPins.P1;
+        break;
+      case UltrasonicSensorPins.P2:
+        digPin=UltrasonicSensorPins.P2;
+        break;
+    }
+
     // 获取超声波模块，上一个周期中高电平的时间
     function getTimestemp() {
         let timestemp = 0;
         let time_end = 0 ;
         let time_begin = 0 ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 0) {
+        while (pins.digitalReadPin(digPin) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(DigitalPin.P0) == 1 && timestemp < 60000) {
+        while (pins.digitalReadPin(digPin) == 1 && timestemp < 60000) {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
