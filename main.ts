@@ -254,7 +254,8 @@ namespace magibit {
   /**
    * read Ultrasonic sensor's value
    * @param pin sensor's active pin
-   * @return number returns ultrasonic range from 3-400cm. It's only used with seeedstudio's ultrasonic grove module.
+   * @return number returns ultrasonic range from 4-50cm. 
+   * when sample times is set greater than one time,that means the distance that ultrasonic module detected is the avarage value
    */
   //% blockId=ultrasonic_sensor_range_read
   //% block="📡Read ultrasonic(cm) at %pin| and set sample times %times"

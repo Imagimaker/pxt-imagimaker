@@ -9,7 +9,7 @@
   "magibit.SoilSensorReadValue|param|pin": "sensor's active pin",
   "magibit.SoundSensorReadValue": "read sound sensor's value\r\r\n@return number returns analog value from 0 to 1023",
   "magibit.SoundSensorReadValue|param|pin": "sensor's active pin",
-  "magibit.UltrasonicReadValue": "read Ultrasonic sensor's value\r\r\n@return number returns ultrasonic range from 4-50cm. \r\nwhen sample times is set greater than one time,that means the distance that ultrasonic module detected is the avarage value",
+  "magibit.UltrasonicReadValue": "读取超声波传感器的数值\r\r\n@返回值 返回探测到的距离单位为cm ,探测距离为4~50cm. \r\n当采样次数设置为大于一次,意味着超声波模块返回的值为多次测量的平均值",
   "magibit.UltrasonicReadValue|param|pin": "sensor's active pin",
   "magibit.airHumidityReadValue": "read air humidity sensor's value\r\r\n@return number returns analog value from 0 to 1023",
   "magibit.airHumidityReadValue|param|pin": "sensor's active pin",
