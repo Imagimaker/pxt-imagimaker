@@ -2,6 +2,8 @@
 # Magibit Library for Micro:bit
 version: v0.1.2
 
+http://docs.imagimaker.com/
+
 Micro:Bit Package for Magibit hardware series. The package is used with Magishield/Magibit microcontroller and sensor series. It could work without Magishield, people should use a adapter (4pin grove <-> alligator clip) to connect the sensor and Micro:Bit
 
 该扩展包为麦极创客专门为Micro:bit开发的语句库。推荐配合麦极创客的Magishield扩展板、Magibit主板和Magibit传感器套装进行使用，以便获得最好的体验。同时该包也支持市面上绝大多数的Micro:bit传感器模块和执行器，用户自行进行pin口连接即可。
