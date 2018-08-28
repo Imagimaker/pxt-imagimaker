@@ -16,8 +16,8 @@
   "magibit.motorStopAll|block": "所有电机停止转动",
   "magibit.potentiometerReadValue|block": "🎚电位器旋转位置的模拟值 at |%pin|",
   "magibit.SampleTimes.OneTime|block": "1次",
-  "magibit.SampleTimes.ThreeTimes|block": "2次",
-  "magibit.SampleTimes.SevenTimes|block": "3次",
+  "magibit.SampleTimes.ThreeTimes|block": "3次",
+  "magibit.SampleTimes.SevenTimes|block": "7次",
   "magibit|block": "麦极创客",
   "{id:category}Magibit": "麦极创客"
 }

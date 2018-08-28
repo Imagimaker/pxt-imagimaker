@@ -53,6 +53,9 @@ namespace magibit {
   }
 
   export enum InfraredSensorPins {
+    P0,
+    P1,
+    P2,
     P13,
     P16
   }
@@ -166,9 +169,20 @@ namespace magibit {
   //% weight=77
   export function InfraredSensorReadValue(pin: InfraredSensorPins): number {
     switch (pin) {
+      case InfraredSensorPins.P0:
+        pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P0);
+      case InfraredSensorPins.P1:
+        pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P1);
+      case InfraredSensorPins.P2:
+        pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P2);
       case InfraredSensorPins.P13:
+        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
         return pins.digitalReadPin(DigitalPin.P13);
       case InfraredSensorPins.P16:
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
         return pins.digitalReadPin(DigitalPin.P16);
       default:
         return 0;
@@ -186,9 +200,20 @@ namespace magibit {
   //% weight=76
   export function MotorSpeedSensorReadValue(pin: InfraredSensorPins): number {
     switch (pin) {
+      case InfraredSensorPins.P0:
+        pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P0);
+      case InfraredSensorPins.P1:
+        pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P1);
+      case InfraredSensorPins.P2:
+        pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+        return pins.digitalReadPin(DigitalPin.P2);
       case InfraredSensorPins.P13:
+        pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
         return pins.digitalReadPin(DigitalPin.P13);
       case InfraredSensorPins.P16:
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
         return pins.digitalReadPin(DigitalPin.P16);
       default:
         return 0;
