@@ -17,7 +17,9 @@ namespace magibit {
   }
 
   export enum MotorDirection {
+    //% blockId="Forward" block="0"
     Forward,
+    //% blockId="Backward" block="1"
     Backward
   }
 
