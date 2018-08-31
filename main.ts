@@ -223,34 +223,6 @@ namespace magibit {
   }
 
   /**
-   * read air temperature sensor's value
-   * @param pin sensor's active pin
-   * @return number returns analog value from 0 to 1023
-   */
-  //% blockId=magibit_sensor_air_temperature_read
-  //% block="🌡Read air temperature(°C) at %pin|"
-  //% blockGap=8
-  //% weight=75
-  export function AirTemperatureReadValue(pin: AirSensorPins): number {
-    let tmpVal = 0;
-    switch (pin) {
-      case AirSensorPins.P0: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A0, DHTTemStyle.MINODE_DHT_CELSIUS);
-        break;
-      }
-      case AirSensorPins.P1: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A1, DHTTemStyle.MINODE_DHT_CELSIUS);
-        break;
-      }
-      case AirSensorPins.P2: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A2, DHTTemStyle.MINODE_DHT_CELSIUS);
-        break;
-      }
-    }
-    return tmpVal;
-  }
-
-  /**
    * read air humidity sensor's value
    * @param pin sensor's active pin
    * @return number returns analog value from 0 to 1023
@@ -258,7 +230,7 @@ namespace magibit {
   //% blockId=magibit_sensor_air_humidity_read
   //% block="🌡Read air humidity(%) at %pin|"
   //% blockGap=16
-  //% weight=74
+  //% weight=75
   export function AirHumidityReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     switch (pin) {
@@ -272,6 +244,34 @@ namespace magibit {
       }
       case AirSensorPins.P2: {
         tmpVal = minode.DHTGetHumidity(ConnName.A2);
+        break;
+      }
+    }
+    return tmpVal;
+  }
+
+  /**
+   * read air temperature sensor's value
+   * @param pin sensor's active pin
+   * @return number returns analog value from 0 to 1023
+   */
+  //% blockId=magibit_sensor_air_temperature_read
+  //% block="🌡Read air temperature(°C) at %pin|"
+  //% blockGap=16
+  //% weight=74
+  export function AirTemperatureReadValue(pin: AirSensorPins): number {
+    let tmpVal = 0;
+    switch (pin) {
+      case AirSensorPins.P0: {
+        tmpVal = minode.DHTGetTemperature(ConnName.A0, DHTTemStyle.MINODE_DHT_CELSIUS);
+        break;
+      }
+      case AirSensorPins.P1: {
+        tmpVal = minode.DHTGetTemperature(ConnName.A1, DHTTemStyle.MINODE_DHT_CELSIUS);
+        break;
+      }
+      case AirSensorPins.P2: {
+        tmpVal = minode.DHTGetTemperature(ConnName.A2, DHTTemStyle.MINODE_DHT_CELSIUS);
         break;
       }
     }
