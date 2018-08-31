@@ -103,7 +103,7 @@ namespace magibit {
   //% block="🔆Light level read analog at |%pin|"
   //% blockGap=16
   //% weight=80
-  export function lightSensorReadValue(pin: LightSensorPins): number {
+  export function LightSensorReadValue(pin: LightSensorPins): number {
     switch (pin) {
       case LightSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -231,7 +231,7 @@ namespace magibit {
   //% block="🌡Read air temperature(°C) at %pin|"
   //% blockGap=8
   //% weight=75
-  export function airTemperatureReadValue(pin: AirSensorPins): number {
+  export function AirTemperatureReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     switch (pin) {
       case AirSensorPins.P0: {
@@ -259,7 +259,7 @@ namespace magibit {
   //% block="🌡Read air humidity(%) at %pin|"
   //% blockGap=16
   //% weight=74
-  export function airHumidityReadValue(pin: AirSensorPins): number {
+  export function AirHumidityReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     switch (pin) {
       case AirSensorPins.P0: {
@@ -409,7 +409,7 @@ namespace magibit {
   //% block="🕹Position of joystick, x-axis |%joystick|"
   //% blockGap=8
   //% weight=72
-  export function joystickReadXValue(joystick: Joystick): number {
+  export function JoystickReadXValue(joystick: Joystick): number {
     switch (joystick) {
       case Joystick.A1:
         return pins.analogReadPin(AnalogPin.P1);
@@ -429,7 +429,7 @@ namespace magibit {
   //% block="🕹Position of joystick, y-axis |%joystick|"
   //% blockGap=8
   //% weight=71
-  export function joystickReadYValue(joystick: Joystick): number {
+  export function JoystickReadYValue(joystick: Joystick): number {
     switch (joystick) {
       case Joystick.A1:
         return pins.analogReadPin(AnalogPin.P2);
@@ -449,7 +449,7 @@ namespace magibit {
   //% block="🕹Joystick |%joystick| is pressed"
   //% blockGap=16
   //% weight=70
-  export function joystickReadButtonStateValue(joystick: Joystick): boolean {
+  export function JoystickReadYValue(joystick: Joystick): boolean {
     let tmpVal = 0;
     let tmpP0Val = pins.analogReadPin(AnalogPin.P0);
     let tmpP1Val = pins.analogReadPin(AnalogPin.P1);
@@ -474,7 +474,7 @@ namespace magibit {
   //% block="🎚Potentiometer read analog at |%pin|"
   //% blockGap=16
   //% weight=69
-  export function potentiometerReadValue(pin: PotentiometerSensorPins): number {
+  export function PotentiometerReadValue(pin: PotentiometerSensorPins): number {
     switch (pin) {
       case PotentiometerSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -496,9 +496,9 @@ namespace magibit {
   //% weight=68
   //% blockGap=8
   //% speed.min=0 speed.max=1023
-  export function motorSetSpeed(motor: Motor, direction: MotorDirection, speed: number): void {
+  export function MotorSetSpeed(motor: Motor, direction: MotorDirection, speed: number): void {
 
-    let speedVal = filterInnerTypeNumber(InnerNumberType.ANALOG, speed);
+    let speedVal = FilterInnerTypeNumber(InnerNumberType.ANALOG, speed);
 
     if (motor == Motor.M1) {
       pins.digitalWritePin(DigitalPin.P8, direction);
@@ -516,9 +516,9 @@ namespace magibit {
   //% block="Motor stop all"
   //% blockGap=16
   //% weight=67
-  export function motorStopAll(): void {
-    motorSetSpeed(Motor.M1, MotorDirection.Forward, 0);
-    motorSetSpeed(Motor.M2, MotorDirection.Forward, 0);
+  export function MotorStopAll(): void {
+    MotorSetSpeed(Motor.M1, MotorDirection.Forward, 0);
+    MotorSetSpeed(Motor.M2, MotorDirection.Forward, 0);
   }
 
 
@@ -530,9 +530,9 @@ namespace magibit {
   //% weight=66
   //% blockGap=8
   //% brightness.min=0 brightness.max=1023
-  export function ledSetBrightness(pin: LEDPin, brightness: number): void {
+  export function LedSetBrightness(pin: LEDPin, brightness: number): void {
 
-    let brightnessVal = filterInnerTypeNumber(InnerNumberType.ANALOG, brightness);
+    let brightnessVal = FilterInnerTypeNumber(InnerNumberType.ANALOG, brightness);
 
     switch (pin) {
       case LEDPin.P0:
@@ -560,16 +560,16 @@ namespace magibit {
   //% block="💡LED |%pin| |%state|"
   //% blockGap=8
   //% weight=65
-  export function ledSetOnOff(pin: LEDPin, state: LEDState): void {
+  export function LedSetOnOff(pin: LEDPin, state: LEDState): void {
     switch (state) {
       case LEDState.ON:
-        ledSetBrightness(pin, 1023);
+        LedSetBrightness(pin, 1023);
         break;
       case LEDState.OFF:
-        ledSetBrightness(pin, 0);
+        LedSetBrightness(pin, 0);
         break;
       default:
-        ledSetBrightness(pin, 0);
+        LedSetBrightness(pin, 0);
     }
   }
 
@@ -579,7 +579,7 @@ namespace magibit {
    * @param {number} analogNumber
    * @returns {number}
    */
-  export function filterInnerTypeNumber(innerType: InnerNumberType, analogNumber: number): number {
+  export function FilterInnerTypeNumber(innerType: InnerNumberType, analogNumber: number): number {
     switch (innerType) {
       case InnerNumberType.ANALOG: {
         if (analogNumber < 0 || analogNumber == null) {
