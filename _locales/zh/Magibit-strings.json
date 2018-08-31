@@ -18,8 +18,8 @@
   "magibit.SampleTimes.OneTime|block": "1次",
   "magibit.SampleTimes.ThreeTimes|block": "3次",
   "magibit.SampleTimes.SevenTimes|block": "7次",
-  "magibit.MotorDirection.Backward|block": "向后",
-  "magibit.MotorDirection.Forward|block": "向前",  
+  "magibit.MotorDirection.Backward|block": "反转",
+  "magibit.MotorDirection.Forward|block": "正转",  
   "magibit|block": "麦极创客",
   "{id:category}Magibit": "麦极创客"
 }
