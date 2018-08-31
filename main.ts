@@ -228,7 +228,7 @@ namespace magibit {
    * @return number returns analog value from 0 to 1023
    */
   //% blockId=magibit_sensor_air_temperature_read
-  //% block="🌡Read air temperature(°C) at |%pin|"
+  //% block="🌡Read air temperature(°C) at %pin|"
   //% blockGap=8
   //% weight=75
   export function airTemperatureReadValue(pin: AirSensorPins): number {
@@ -256,7 +256,7 @@ namespace magibit {
    * @return number returns analog value from 0 to 1023
    */
   //% blockId=magibit_sensor_air_humidity_read
-  //% block="🌡Read air humidity(%) at |%pin|"
+  //% block="🌡Read air humidity(%) at %pin|"
   //% blockGap=16
   //% weight=74
   export function airHumidityReadValue(pin: AirSensorPins): number {
