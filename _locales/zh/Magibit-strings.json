@@ -4,8 +4,6 @@
   "magibit.SoilSensorReadValue|block": "💧土壤湿度的模拟值 at |%pin|",
   "magibit.SoundSensorReadValue|block": "🔊声音大小的模拟值 at |%pin|",
   "magibit.UltrasonicReadValue|block":"📡超声波传感器，距离（cm）at |%pin|",
-  "magibit.AirHumidityReadValue|block": "🌡空气湿度(%) at %pin|",
-  "magibit.AirTemperatureReadValue|block": "🌡空气温度(℃) at %pin|",
   "magibit.JoystickReadButtonStateValue|block": "🕹当摇杆 |%joystick| 被按下",
   "magibit.JoystickReadXValue|block": "🕹摇杆X轴的位置 |%joystick|",
   "magibit.JoystickReadYValue|block": "🕹摇杆Y轴的位置 |%joystick|",
