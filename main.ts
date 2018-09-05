@@ -103,7 +103,7 @@ namespace magibit {
   //% block="🔆Light level read analog at |%pin|"
   //% blockGap=16
   //% weight=80
-  export function LightSensorReadValue(pin: LightSensorPins): number {
+  export function lightSensorReadValue(pin: LightSensorPins): number {
     switch (pin) {
       case LightSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -125,7 +125,7 @@ namespace magibit {
   //% block="🔊Sound read analog at |%pin|"
   //% blockGap=16
   //% weight=79
-  export function SoundSensorReadValue(pin: SoundSensorPins): number {
+  export function soundSensorReadValue(pin: SoundSensorPins): number {
     switch (pin) {
       case SoundSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -147,7 +147,7 @@ namespace magibit {
   //% block="💧Soil moisture read analog at |%pin|"
   //% blockGap=16
   //% weight=78
-  export function SoilSensorReadValue(pin: SoilSensorPins): number {
+  export function soilSensorReadValue(pin: SoilSensorPins): number {
     switch (pin) {
       case SoilSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -169,7 +169,7 @@ namespace magibit {
   //% block="👀infrared read digital at |%pin|"
   //% blockGap=16
   //% weight=77
-  export function InfraredSensorReadValue(pin: InfraredSensorPins): number {
+  export function infraredSensorReadValue(pin: InfraredSensorPins): number {
     switch (pin) {
       case InfraredSensorPins.P0:
         pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
@@ -200,7 +200,7 @@ namespace magibit {
   //% block="⏱Motor speed read digital at |%pin|"
   //% blockGap=16
   //% weight=76
-  export function MotorSpeedSensorReadValue(pin: InfraredSensorPins): number {
+  export function motorSpeedSensorReadValue(pin: InfraredSensorPins): number {
     switch (pin) {
       case InfraredSensorPins.P0:
         pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
@@ -222,28 +222,209 @@ namespace magibit {
     }
   }
 
+  class DHT {
+    pin:AirSensorPins;
+    bt:number;
+    currentTem:number;
+    Temperature:number;
+    Humidity:number;
+    count:number;
+    constructor(pin: AirSensorPins){
+      this.pin = pin;
+      this.bt;
+      this.currentTem = -99;
+      this.Temperature;
+      this.Humidity
+      this.count;
+    }
+
+    dhtGet (): number {
+      switch (this.pin) {
+        case AirSensorPins.P0:
+          pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P0);
+        case AirSensorPins.P1:
+          pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P1);
+        case AirSensorPins.P2:
+          pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
+          return pins.digitalReadPin(DigitalPin.P2);
+        default:
+          return 0;
+      }
+    }
+
+    dhtSet (level:number) {
+      switch (this.pin) {
+        case AirSensorPins.P0:
+          pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P0 ,level);
+          break;
+        case AirSensorPins.P1:
+          pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P1 ,level);
+          break;
+        case AirSensorPins.P2:
+          pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
+          pins.digitalWritePin(DigitalPin.P2 ,level);
+          break;
+      }
+    }
+
+    delay_us(us:number) {
+      control.waitMicros(us);
+    }
+
+    wait_ms(ms:number) {
+      basic.pause(ms);
+    }
+
+    dhtStart() {
+      this.dhtSet(1);
+      this.delay_us(60);
+      this.dhtSet(0);
+      this.wait_ms(25);
+      this.dhtSet(1);
+    }
+
+    dhtReadAck() {
+      if(this.whileGet(1) === 1)
+        return 1;
+      if(this.whileGet(0) === 1)
+        return 1;
+      if(this.whileGet(1) === 1)
+        return 1;
+
+      return 0;
+    }
+
+    whileGet(value:number):number {
+      let time_out:number = 0;
+      let TIME_TH:number = 10000;
+      while((value === this.dhtGet()) && (time_out < TIME_TH)) {
+        time_out ++;
+      }
+
+      if(time_out === TIME_TH)
+        return 1;
+      else
+        return 0;
+    }
+
+    dhtReadOneBit() {
+      this.whileGet(0);
+      this.delay_us(60);
+      this.bt <<= 1;
+      if(1===this.dhtGet()){
+        this.bt |= 1;
+        this.whileGet(1);
+      }
+      else
+        this.bt |= 0;
+    }
+
+    dhtReadOneByte() {
+      this.bt = 0;
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+      this.dhtReadOneBit();
+    }
+
+    // systemTick() {
+    //   let temp = 0;
+    //   this.count ++;
+
+    //   if (this.count === 200){
+    //     this.dhtGetHt();
+    //     if (this.currentTem === -99){
+    //       this.currentTem = this.Temperature;
+    //     }
+
+    //     if((this.Temperature - this.currentTem === 1) || (this.currentTem - this.Temperature === 1)){
+    //       this.currentTem = temp;
+    //       //MicroBitEvent(this->baseId + this->id, MINODE_DHT_EVT_CHANGE);
+    //     }
+    //     this.count = 0;
+    //   }
+
+    // }
+
+    dhtGetHt():number {
+      let CHECKSUM = 0;
+      let R_H = 0;
+      let R_L = 0;
+      let T_H = 0;
+      let T_L = 0;
+
+      this.dhtStart();
+      if(this.dhtReadAck() === 1)
+        return 0;
+
+      this.dhtReadOneByte();
+      R_H = this.bt;
+      this.dhtReadOneByte();
+      R_L = this.bt;
+      this.dhtReadOneByte();
+      T_H = this.bt;
+      this.dhtReadOneByte();
+      T_L = this.bt;
+      this.dhtReadOneByte();
+      CHECKSUM = this.bt;
+
+      if(CHECKSUM === R_H+R_L+T_H+T_L){
+        this.Humidity = R_H;
+        this.Temperature = T_H;
+        return 0;
+      }
+      else
+        return 1;
+    }
+
+    getTemperature():number {
+      if (this.currentTem === -99){
+        this.dhtGetHt();
+        this.currentTem = this.Temperature;
+      }
+      return this.Temperature;
+    }
+
+    getHumidity():number {
+      if (this.currentTem === -99){
+        this.dhtGetHt();
+        this.currentTem = this.Temperature;
+      }
+      return this.Humidity;
+    }
+  }
+
   /**
    * read air humidity sensor's value
    * @param pin sensor's active pin
    * @return number returns analog value from 0 to 1023
    */
   //% blockId=magibit_sensor_air_humidity_read
-  //% block="🌡Read air humidity(%) at %pin|"
+  //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
-  export function AirHumidityReadValue(pin: AirSensorPins): number {
+  export function airHumidityReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
+    let dht = new DHT(pin);
     switch (pin) {
       case AirSensorPins.P0: {
-        tmpVal = minode.DHTGetHumidity(ConnName.A0);
+        tmpVal = dht.getHumidity();
         break;
       }
       case AirSensorPins.P1: {
-        tmpVal = minode.DHTGetHumidity(ConnName.A1);
+        tmpVal = dht.getHumidity();
         break;
       }
       case AirSensorPins.P2: {
-        tmpVal = minode.DHTGetHumidity(ConnName.A2);
+        tmpVal = dht.getHumidity();
         break;
       }
     }
@@ -251,27 +432,28 @@ namespace magibit {
   }
 
   /**
-   * read air temperature sensor's value
+   * read air Temperature sensor's value
    * @param pin sensor's active pin
    * @return number returns analog value from 0 to 1023
    */
-  //% blockId=magibit_sensor_air_temperature_read
-  //% block="🌡Read air temperature(°C) at %pin|"
+  //% blockId=magibit_sensor_air_Temperature_read
+  //% block="🌡Read air Temperature(°C) at %pin|"
   //% blockGap=16
   //% weight=74
-  export function AirTemperatureReadValue(pin: AirSensorPins): number {
+  export function airTemperatureReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
+    let dht = new DHT(pin);
     switch (pin) {
       case AirSensorPins.P0: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A0, DHTTemStyle.MINODE_DHT_CELSIUS);
+        tmpVal = dht.getTemperature();
         break;
       }
       case AirSensorPins.P1: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A1, DHTTemStyle.MINODE_DHT_CELSIUS);
+        tmpVal = dht.getTemperature();
         break;
       }
       case AirSensorPins.P2: {
-        tmpVal = minode.DHTGetTemperature(ConnName.A2, DHTTemStyle.MINODE_DHT_CELSIUS);
+        tmpVal = dht.getTemperature();
         break;
       }
     }
@@ -287,7 +469,7 @@ namespace magibit {
   //% block="📡Ultrasonic read distance(cm) at %pin| "
   //% blockGap=16
   //% weight=73
-  export function UltrasonicReadValue(pin: UltrasonicSensorPins ): number {
+  export function ultrasonicReadValue(pin: UltrasonicSensorPins ): number {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
     let distance: number = 0 ;
@@ -409,7 +591,7 @@ namespace magibit {
   //% block="🕹Position of joystick, x-axis |%joystick|"
   //% blockGap=8
   //% weight=72
-  export function JoystickReadXValue(joystick: Joystick): number {
+  export function joystickReadXValue(joystick: Joystick): number {
     switch (joystick) {
       case Joystick.A1:
         return pins.analogReadPin(AnalogPin.P1);
@@ -429,7 +611,7 @@ namespace magibit {
   //% block="🕹Position of joystick, y-axis |%joystick|"
   //% blockGap=8
   //% weight=71
-  export function JoystickReadYValue(joystick: Joystick): number {
+  export function joystickReadYValue(joystick: Joystick): number {
     switch (joystick) {
       case Joystick.A1:
         return pins.analogReadPin(AnalogPin.P2);
@@ -449,7 +631,7 @@ namespace magibit {
   //% block="🕹Joystick |%joystick| is pressed"
   //% blockGap=16
   //% weight=70
-  export function JoystickReadButtonStateValue(joystick: Joystick): boolean {
+  export function joystickReadButtonStateValue(joystick: Joystick): boolean {
     let tmpVal = 0;
     let tmpP0Val = pins.analogReadPin(AnalogPin.P0);
     let tmpP1Val = pins.analogReadPin(AnalogPin.P1);
@@ -474,7 +656,7 @@ namespace magibit {
   //% block="🎚Potentiometer read analog at |%pin|"
   //% blockGap=16
   //% weight=69
-  export function PotentiometerReadValue(pin: PotentiometerSensorPins): number {
+  export function potentiometerReadValue(pin: PotentiometerSensorPins): number {
     switch (pin) {
       case PotentiometerSensorPins.P0:
         return pins.analogReadPin(AnalogPin.P0);
@@ -496,9 +678,9 @@ namespace magibit {
   //% weight=68
   //% blockGap=8
   //% speed.min=0 speed.max=1023
-  export function MotorSetSpeed(motor: Motor, direction: MotorDirection, speed: number): void {
+  export function motorSetSpeed(motor: Motor, direction: MotorDirection, speed: number): void {
 
-    let speedVal = FilterInnerTypeNumber(InnerNumberType.ANALOG, speed);
+    let speedVal = filterInnerTypeNumber(InnerNumberType.ANALOG, speed);
 
     if (motor == Motor.M1) {
       pins.digitalWritePin(DigitalPin.P8, direction);
@@ -516,9 +698,9 @@ namespace magibit {
   //% block="Motor stop all"
   //% blockGap=16
   //% weight=67
-  export function MotorStopAll(): void {
-    MotorSetSpeed(Motor.M1, MotorDirection.Forward, 0);
-    MotorSetSpeed(Motor.M2, MotorDirection.Forward, 0);
+  export function motorStopAll(): void {
+    motorSetSpeed(Motor.M1, MotorDirection.Forward, 0);
+    motorSetSpeed(Motor.M2, MotorDirection.Forward, 0);
   }
 
 
@@ -530,9 +712,9 @@ namespace magibit {
   //% weight=66
   //% blockGap=8
   //% brightness.min=0 brightness.max=1023
-  export function LedSetBrightness(pin: LEDPin, brightness: number): void {
+  export function ledSetBrightness(pin: LEDPin, brightness: number): void {
 
-    let brightnessVal = FilterInnerTypeNumber(InnerNumberType.ANALOG, brightness);
+    let brightnessVal = filterInnerTypeNumber(InnerNumberType.ANALOG, brightness);
 
     switch (pin) {
       case LEDPin.P0:
@@ -560,16 +742,16 @@ namespace magibit {
   //% block="💡LED |%pin| |%state|"
   //% blockGap=8
   //% weight=65
-  export function LedSetOnOff(pin: LEDPin, state: LEDState): void {
+  export function ledSetOnOff(pin: LEDPin, state: LEDState): void {
     switch (state) {
       case LEDState.ON:
-        LedSetBrightness(pin, 1023);
+        ledSetBrightness(pin, 1023);
         break;
       case LEDState.OFF:
-        LedSetBrightness(pin, 0);
+        ledSetBrightness(pin, 0);
         break;
       default:
-        LedSetBrightness(pin, 0);
+        ledSetBrightness(pin, 0);
     }
   }
 
@@ -579,7 +761,7 @@ namespace magibit {
    * @param {number} analogNumber
    * @returns {number}
    */
-  export function FilterInnerTypeNumber(innerType: InnerNumberType, analogNumber: number): number {
+  export function filterInnerTypeNumber(innerType: InnerNumberType, analogNumber: number): number {
     switch (innerType) {
       case InnerNumberType.ANALOG: {
         if (analogNumber < 0 || analogNumber == null) {
