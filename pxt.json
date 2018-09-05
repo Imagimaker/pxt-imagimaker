@@ -4,8 +4,7 @@
     "description": "Magibit package for Micro:bit",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "minode": "github:minodekit/pxt-minode#v1.0.5"
+        "core": "*"
     },
     "files": [
         "README.md",
