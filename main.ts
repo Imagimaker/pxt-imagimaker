@@ -289,11 +289,11 @@ namespace magibit {
 
     dhtReadAck() {
       if(this.whileGet(1) === 1)
-        return 1;
+        return 1;//return 1
       if(this.whileGet(0) === 1)
-        return 1;
+        return 2;//return 1
       if(this.whileGet(1) === 1)
-        return 1;
+        return 3;//return 1
 
       return 0;
     }
@@ -362,9 +362,10 @@ namespace magibit {
       let T_L = 0;
 
       this.dhtStart();
-      if(this.dhtReadAck() === 1)
-        return 0;
-
+      // if(this.dhtReadAck() === 1)
+      //   return 0;
+      this.Humidity=this.dhtReadAck();
+         
       this.dhtReadOneByte();
       R_H = this.bt;
       this.dhtReadOneByte();
@@ -411,7 +412,6 @@ namespace magibit {
   //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
-  //% deprecated=true
   export function airHumidityReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     let dht = new DHT(pin);
@@ -441,7 +441,6 @@ namespace magibit {
   //% block="🌡Read air Temperature(°C) at %pin|"
   //% blockGap=16
   //% weight=74
-  //% deprecated=true
   export function airTemperatureReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     let dht = new DHT(pin);
