@@ -394,18 +394,11 @@ namespace magibit {
     }
 
     getHumidity():number {
-      // if (this.currentTem === -99){
-      //   this.dhtGetHt();
-      //   this.currentTem = this.Temperature;
-      // }
-      // return this.Humidity;
-
-      if(this.Humidity===0){
-        return 0;
+      if (this.currentTem === -99){
+        this.dhtGetHt();
+        this.currentTem = this.Temperature;
       }
-      if(this.Humidity===1){
-        return 1;
-      }
+      return this.Humidity;
     }
   }
 
@@ -418,6 +411,7 @@ namespace magibit {
   //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
+  //% deprecated=true
   export function airHumidityReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     let dht = new DHT(pin);
@@ -447,6 +441,7 @@ namespace magibit {
   //% block="🌡Read air Temperature(°C) at %pin|"
   //% blockGap=16
   //% weight=74
+  //% deprecated=true
   export function airTemperatureReadValue(pin: AirSensorPins): number {
     let tmpVal = 0;
     let dht = new DHT(pin);
