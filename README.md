@@ -1,5 +1,5 @@
 
-# A Magibit Library for PXT Micro:bit
+# A Magishield Library for PXT Micro:bit
 version: v0.1.2
 
 http://docs.imagimaker.com/
