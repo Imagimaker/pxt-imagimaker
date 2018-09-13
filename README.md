@@ -1,5 +1,5 @@
 
-# Magibit Library for Micro:bit
+# A Magibit Library for PXT Micro:bit
 version: v0.1.2
 
 http://docs.imagimaker.com/
