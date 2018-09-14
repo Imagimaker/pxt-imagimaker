@@ -222,186 +222,6 @@ namespace magibit {
     }
   }
 
-  class DHT {
-    pin:AirSensorPins;
-    bt:number;
-    currentTem:number;
-    Temperature:number;
-    Humidity:number;
-    count:number;
-    constructor(pin: AirSensorPins){
-      this.pin = pin;
-      this.bt;
-      this.currentTem = -99;
-      this.Temperature;
-      this.Humidity
-      this.count;
-    }
-
-    dhtGet (): number {
-      switch (this.pin) {
-        case AirSensorPins.P0:
-          pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
-          return pins.digitalReadPin(DigitalPin.P0);
-        case AirSensorPins.P1:
-          pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
-          return pins.digitalReadPin(DigitalPin.P1);
-        case AirSensorPins.P2:
-          pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
-          return pins.digitalReadPin(DigitalPin.P2);
-        default:
-          return 0;
-      }
-    }
-
-    dhtSet (level:number) {
-      switch (this.pin) {
-        case AirSensorPins.P0:
-          pins.setPull(DigitalPin.P0, PinPullMode.PullNone);
-          pins.digitalWritePin(DigitalPin.P0 ,level);
-          break;
-        case AirSensorPins.P1:
-          pins.setPull(DigitalPin.P1, PinPullMode.PullNone);
-          pins.digitalWritePin(DigitalPin.P1 ,level);
-          break;
-        case AirSensorPins.P2:
-          pins.setPull(DigitalPin.P2, PinPullMode.PullNone);
-          pins.digitalWritePin(DigitalPin.P2 ,level);
-          break;
-      }
-    }
-
-    delay_us(us:number) {
-      control.waitMicros(us);
-    }
-
-    wait_ms(ms:number) {
-      basic.pause(ms);
-    }
-
-    dhtStart() {
-      this.dhtSet(1);
-      this.delay_us(60);
-      this.dhtSet(0);
-      this.wait_ms(25);
-      this.dhtSet(1);
-    }
-
-    dhtReadAck() {
-      if(this.whileGet(1) === 1)
-        return 1;//return 1
-      if(this.whileGet(0) === 1)
-        return 1;//return 1
-      if(this.whileGet(1) === 1)
-        return 1;//return 1
-
-      return 0;
-    }
-
-    whileGet(value:number):number {
-      let time_out:number = 0;
-      let TIME_TH:number = 10000;
-      while((value === this.dhtGet()) && (time_out < TIME_TH)) {
-        time_out ++;
-      }
-
-      if(time_out === TIME_TH)
-        return 1;
-      else
-        return 0;
-    }
-
-    dhtReadOneBit() {
-      this.whileGet(0);
-      this.delay_us(50);
-      this.bt <<= 1;
-      if(1===this.dhtGet()){
-        this.bt |= 1;
-        this.whileGet(1);
-      }
-      else
-        this.bt |= 0;
-    }
-
-    dhtReadOneByte() {
-      this.bt = 0;
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-      this.dhtReadOneBit();
-    }
-
-    // systemTick() {
-    //   let temp = 0;
-    //   this.count ++;
-
-    //   if (this.count === 200){
-    //     this.dhtGetHt();
-    //     if (this.currentTem === -99){
-    //       this.currentTem = this.Temperature;
-    //     }
-
-    //     if((this.Temperature - this.currentTem === 1) || (this.currentTem - this.Temperature === 1)){
-    //       this.currentTem = temp;
-    //       //MicroBitEvent(this->baseId + this->id, MINODE_DHT_EVT_CHANGE);
-    //     }
-    //     this.count = 0;
-    //   }
-
-    // }
-
-    dhtGetHt():number {
-      let CHECKSUM = 0;
-      let R_H = 0;
-      let R_L = 0;
-      let T_H = 0;
-      let T_L = 0;
-
-      this.dhtStart();
-      if(this.dhtReadAck() === 1)
-        return 0;
-         
-      this.dhtReadOneByte();
-      R_H = this.bt;
-      this.dhtReadOneByte();
-      R_L = this.bt;
-      this.dhtReadOneByte();
-      T_H = this.bt;
-      this.dhtReadOneByte();
-      T_L = this.bt;
-      this.dhtReadOneByte();
-      CHECKSUM = this.bt;
-
-      if(CHECKSUM === R_H+R_L+T_H+T_L){
-        this.Humidity = R_H;
-        this.Temperature = T_H;
-        return 1;
-      }
-      else
-        return 0;
-    }
-
-    getTemperature():number {
-      if (this.currentTem === -99){
-        this.dhtGetHt();
-        this.currentTem = this.Temperature;
-      }
-      return this.Temperature;
-    }
-
-    getHumidity():number {
-      if (this.currentTem === -99){
-        this.dhtGetHt();
-        this.currentTem = this.Temperature;
-      }
-      return this.Humidity;
-    }
-  }
-
   /**
    * read air humidity sensor's value
    * @param pin sensor's active pin
@@ -411,24 +231,9 @@ namespace magibit {
   //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
+
   export function airHumidityReadValue(pin: AirSensorPins): number {
-    let tmpVal = 0;
-    let dht = new DHT(pin);
-    switch (pin) {
-      case AirSensorPins.P0: {
-        tmpVal = dht.getHumidity();
-        break;
-      }
-      case AirSensorPins.P1: {
-        tmpVal = dht.getHumidity();
-        break;
-      }
-      case AirSensorPins.P2: {
-        tmpVal = dht.getHumidity();
-        break;
-      }
-    }
-    return tmpVal;
+    return 0;
   }
 
   /**
@@ -440,24 +245,9 @@ namespace magibit {
   //% block="🌡Read air Temperature(°C) at %pin|"
   //% blockGap=16
   //% weight=74
+ 
   export function airTemperatureReadValue(pin: AirSensorPins): number {
-    let tmpVal = 0;
-    let dht = new DHT(pin);
-    switch (pin) {
-      case AirSensorPins.P0: {
-        tmpVal = dht.getTemperature();
-        break;
-      }
-      case AirSensorPins.P1: {
-        tmpVal = dht.getTemperature();
-        break;
-      }
-      case AirSensorPins.P2: {
-        tmpVal = dht.getTemperature();
-        break;
-      }
-    }
-    return tmpVal;
+    return 0;
   }
 
   /**
