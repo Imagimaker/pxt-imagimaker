@@ -25,7 +25,7 @@ pxt-package for Magishield/Magibit hardware series. The package is used with Mag
 
 #### 2.1 How to add the package
 
-2.1.1. 
+2.1.1. 1st method
 - Advanced->add package(点击高级->添加软件包), input 'imagimaker' and click the package.
 
 2.1.2. If the 1st method can't work:
