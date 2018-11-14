@@ -237,7 +237,7 @@ namespace magibit {
   }
 
   /**
-   * read air Temperature sensor's value
+   * read air Temperature sensor's value, can't use
    * @param pin sensor's active pin
    * @return number returns analog value from 0 to 1023
    */
