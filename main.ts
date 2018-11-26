@@ -278,18 +278,21 @@ namespace magibit {
         trigPin=DigitalPin.P1;
         break;
     }
-    
-    pins.digitalWritePin(trigPin, 0)
-    control.waitMicros(10)
-    pins.digitalWritePin(trigPin, 1)
-    control.waitMicros(20)
-    pins.digitalWritePin(trigPin, 0)
-    control.waitMicros(10)
+
+
     // 获取超声波模块，上一个周期中高电平的时间
     function getTimestemp() {
         let timestemp = 0;
         let time_end = 0 ;
         let time_begin = 0 ;
+
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(10);
+        pins.digitalWritePin(trigPin, 1);
+        control.waitMicros(20);
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(10);
+
         while (pins.digitalReadPin(echoPin) == 0) {
           
         }
