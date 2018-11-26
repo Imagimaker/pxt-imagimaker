@@ -281,32 +281,33 @@ namespace magibit {
 
 
     // 获取超声波模块，上一个周期中高电平的时间
-    // function getTimestemp() {
-    //     let timestemp = 0;
-    //     let time_end = 0 ;
-    //     let time_begin = 0 ;
+    function getTimestemp() {
+        let timestemp = 0;
+        let time_end = 0 ;
+        let time_begin = 0 ;
 
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(10);
+        pins.digitalWritePin(trigPin, 1);
+        control.waitMicros(20);
+        pins.digitalWritePin(trigPin, 0);
+        control.waitMicros(10);
 
-
-    //     while (pins.digitalReadPin(echoPin) == 0) {
+        while (pins.digitalReadPin(echoPin) == 0) {
           
-    //     }
-    //     time_begin = input.runningTimeMicros() ;
-    //     while (pins.digitalReadPin(echoPin) == 1 && timestemp < 60000) {
-    //         time_end = input.runningTimeMicros() ;            
-    //     }
-    //     timestemp = time_end - time_begin ;
-    //     return timestemp;
-    // }
+        }
+        time_begin = input.runningTimeMicros() ;
+        while (pins.digitalReadPin(echoPin) == 1 && timestemp < 60000) {
+            time_end = input.runningTimeMicros() ;            
+        }
+        timestemp = time_end - time_begin ;
+        basic.pause(20);
+        return timestemp;
+    }
     for (let i=0;i<times;i++){
-      pins.digitalWritePin(trigPin, 0);
-      control.waitMicros(10);
-      pins.digitalWritePin(trigPin, 1);
-      control.waitMicros(20);
-      pins.digitalWritePin(trigPin, 0);
-      control.waitMicros(10);
-      totData+=pins.pulseIn(echoPin, PulseValue.High);
-      basic.pause(20);
+
+      totData+=getTimestemp();
+
     }
     avrData=totData/times;
 
