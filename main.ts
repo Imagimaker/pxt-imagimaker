@@ -63,9 +63,8 @@ namespace magibit {
   }
 
   export enum UltrasonicSensorPins {
-    P0,
-    P1,
-    P2
+    A1,
+    A2
   }
 
   export enum SampleTimes {
@@ -267,29 +266,35 @@ namespace magibit {
     let totData: number = 0 ;
     let avrData: number=0;
 
-    let digPin: number ;
+    let echoPin: number ;
+    let trigPin: number ;
     switch (pin) {
-      case UltrasonicSensorPins.P0:
-        digPin=DigitalPin.P0;
+      case UltrasonicSensorPins.A1:
+        echoPin=DigitalPin.P1;
+        trigPin=DigitalPin.P2;
         break;
-      case UltrasonicSensorPins.P1:
-        digPin=DigitalPin.P1;
-        break;
-      case UltrasonicSensorPins.P2:
-        digPin=DigitalPin.P2;
+      case UltrasonicSensorPins.A2:
+        echoPin=DigitalPin.P0;
+        trigPin=DigitalPin.P1;
         break;
     }
-
+    
+    pins.digitalWritePin(trigPin, 0)
+    control.waitMicros(10)
+    pins.digitalWritePin(trigPin, 1)
+    control.waitMicros(20)
+    pins.digitalWritePin(trigPin, 0)
+    control.waitMicros(10)
     // 获取超声波模块，上一个周期中高电平的时间
     function getTimestemp() {
         let timestemp = 0;
         let time_end = 0 ;
         let time_begin = 0 ;
-        while (pins.digitalReadPin(digPin) == 0) {
+        while (pins.digitalReadPin(echoPin) == 0) {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(digPin) == 1 && timestemp < 60000) {
+        while (pins.digitalReadPin(echoPin) == 1 && timestemp < 60000) {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
