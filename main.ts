@@ -262,7 +262,7 @@ namespace magibit {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
     let distance: number = 0 ;
-    let times=1;
+    let times=10;
     let totData: number = 0 ;
     let avrData: number=0;
 
@@ -375,7 +375,7 @@ namespace magibit {
 
      //转换成厘米
     distance = velocity *  avrData / 20000 ;
-      return distance;
+      return avrData;
 
   }
 
