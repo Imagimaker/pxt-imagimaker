@@ -372,14 +372,11 @@ namespace magibit {
     if(tableIndex<150&&tableIndex>=125) {
       table= table6;
     } 
+    let tableCnt: number = Math.round(tableIndex%25);
+    let velocity: number = table[tableCnt];    
     if(tableIndex>=150) {
-      let velocity: number = 420;
+      velocity = 420;
     }
-    else {
-      let tableCnt: number = Math.round(tableIndex%25);
-      let velocity: number = table[tableCnt];
-    }
-
 
      //转换成厘米
     distance = velocity *  avrData / 20000 ;
