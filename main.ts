@@ -262,7 +262,7 @@ namespace magibit {
     let time_end: number = 0 ;
     let time_begin: number = 0 ;
     let distance: number = 0 ;
-    let times=10;
+    let times=1;
     let totData: number = 0 ;
     let avrData: number=0;
 
@@ -301,7 +301,7 @@ namespace magibit {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
-        basic.pause(20);
+        basic.pause(10);
         return timestemp;
     }
     for (let i=0;i<times;i++){
