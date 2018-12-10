@@ -302,7 +302,7 @@ namespace magibit {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
-        basic.pause(10);
+        basic.pause(1);
         return timestemp;
     }
     for (let i=0;i<times;i++){
