@@ -384,8 +384,11 @@ namespace magibit {
 
      //转换成厘米
     distance = velocity *  avrData / 20000 ;
+    let decimal: number = Math.floor((distance-Math.floor(distance))*10);
+    let decimalArr: number[] = [0,1,2,3,4,5,6,7,8,9];
       
-    return parseFloat(Math.floor(distance)+'.'+Math.round((distance-Math.floor(distance))*10));
+    return Math.floor(distance)+decimalArr[decimal];
+    }
 
   }
 
