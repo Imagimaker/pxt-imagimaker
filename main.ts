@@ -1,3 +1,4 @@
+
 /**
  * support for magibit
  */
@@ -297,7 +298,7 @@ namespace magibit {
           
         }
         time_begin = input.runningTimeMicros() ;
-        while (pins.digitalReadPin(echoPin) == 1 && timestemp < 60000) {
+        while (pins.digitalReadPin(echoPin) == 1) {
             time_end = input.runningTimeMicros() ;            
         }
         timestemp = time_end - time_begin ;
@@ -380,7 +381,7 @@ namespace magibit {
 
      //转换成厘米
     distance = velocity *  avrData / 20000 ;
-      return distance;
+      return parseInt(Math.round(distance*10)/10);
 
   }
 
