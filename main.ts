@@ -374,9 +374,12 @@ namespace magibit {
       table= table6;
     } 
     let tableCnt: number = Math.round(tableIndex%25);
-    let velocity: number = table[tableCnt];    
+    let velocity: number;    
     if(tableIndex>=150) {
       velocity = 420;
+    }
+    else {
+      velocity = table[tableCnt];
     }
 
      //转换成厘米
