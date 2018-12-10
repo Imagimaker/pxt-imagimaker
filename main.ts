@@ -384,7 +384,10 @@ namespace magibit {
 
      //转换成厘米
     distance = velocity *  avrData / 20000 ;
-      return Math.round(distance *10)/10;
+    Math.round((distance-Math.floor(distance))*10)
+      
+    return parseInt(Math.floor(distance)+'.'+Math.round((distance-Math.floor(distance))*10));
+      //return Math.round(distance *10)/10;
 
   }
 
