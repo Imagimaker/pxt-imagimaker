@@ -7,8 +7,11 @@
 
 enum ConnName
 {
+  //% block="P0" enumval=0
   A0 = 0,
+  //% block="P1" enumval=1
   A1 = 1,
+  //% block="P2" enumval=2
   A2 = 2,
   //% block="NC" enumval=-1
   MN_NC = -1
