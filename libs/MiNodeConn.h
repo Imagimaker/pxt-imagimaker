@@ -9,16 +9,14 @@ enum ConnName
 {
   A0 = 0,
   A1 = 1,
-  A2 = 2,
-  MN_NC = NC
+  A2 = 2
 };
 
 enum AnalogConnName
 {
   Analog_A0 = 0,
   Analog_A1 = 1,
-  Analog_A2 = 2,
-  Analog_MN_NC = NC
+  Analog_A2 = 2
 };
 
 class MiNodeConn
