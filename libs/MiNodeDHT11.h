@@ -38,7 +38,6 @@ class MiNodeDHT : public MiNodeComponent
 
     int getTemperature();
     int getHumidity();
-    int getFahrenheitTemperature();
 
     void attach(ConnName connName);
     virtual void systemTick();

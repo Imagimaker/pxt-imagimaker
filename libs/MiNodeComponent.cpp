@@ -13,20 +13,12 @@ MiNodeComponent::~MiNodeComponent()
 
 void MiNodeComponent::initConnector(ConnName connName)
 {
-  if(cn != MN_NC) {
-    return;
-  }
-
   cn = connName;
   this->id = MiNodeConn::calcId(connName);
 }
 
 void MiNodeComponent::initAConnector(AnalogConnName connName)
 {
-  if(cna != Analog_MN_NC) {
-    return;
-  }
-
   cna = connName;
   this->id = MiNodeConn::calcId(connName);
 }
