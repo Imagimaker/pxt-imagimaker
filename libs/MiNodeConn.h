@@ -9,14 +9,18 @@ enum ConnName
 {
   A0 = 0,
   A1 = 1,
-  A2 = 2
+  A2 = 2,
+  //% block="NC" enumval=-1
+  MN_NC = -1
 };
 
 enum AnalogConnName
 {
   Analog_A0 = 0,
   Analog_A1 = 1,
-  Analog_A2 = 2
+  Analog_A2 = 2,
+  //% block="NC" enumval=-1
+  Analog_MN_NC = -1
 };
 
 class MiNodeConn

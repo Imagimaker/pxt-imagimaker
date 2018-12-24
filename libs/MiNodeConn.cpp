@@ -69,7 +69,7 @@ void MiNodeConn::calcPinName(AnalogConnName name, PinName* p0, PinName* p1)
 
 ConnName MiNodeConn::calcConnName(PinName p0)
 {
-  ConnName conn;
+  ConnName conn = MN_NC;
 
   switch(p0) {
     case MICROBIT_PIN_P0:
