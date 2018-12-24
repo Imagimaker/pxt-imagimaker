@@ -7,21 +7,21 @@ MiNode node;
 namespace minode {
 
 	//%
-  	int DHTGetTemperature(ConnName connName){
+  	int DHTGetTemperature(ConnName pin){
    	  MiNodeDHT* pDHT11;
    	  int dht_tempreature=0;
 
-      pDHT11 = node.dht11.attach(connName);
+      pDHT11 = node.dht11.attach(pin);
       dht_tempreature = pDHT11->getTemperature();
   	  return dht_tempreature;
     }
 
     //%
- 	int DHTGetHumidity(ConnName connName){
+ 	int DHTGetHumidity(ConnName pin){
     	MiNodeDHT* pDHT11;
     	int dht_humidity=0;
 
-    	pDHT11 = node.dht11.attach(connName);
+    	pDHT11 = node.dht11.attach(pin);
     	dht_humidity = pDHT11->getHumidity();
 
     	return dht_humidity;
