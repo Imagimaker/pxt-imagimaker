@@ -231,13 +231,13 @@ namespace magibit {
   //% block="🌡Read air humidity at %pin|"
   //% blockGap=16
   //% weight=75
-
-  export function airHumidityReadValue(pin: AirSensorPins): number {
+  //% shim=minode::DHTGetHumidity
+  export function airHumidityReadValue(pin: ConnName): number {
     return 0;
   }
 
   /**
-   * read air Temperature sensor's value, can't use now
+   * read air Temperature sensor's value
    * @param pin sensor's active pin
    * @return number returns analog value from 0 to 1023
    */
@@ -245,8 +245,8 @@ namespace magibit {
   //% block="🌡Read air Temperature(°C) at %pin|"
   //% blockGap=16
   //% weight=74
- 
-  export function airTemperatureReadValue(pin: AirSensorPins): number {
+  //% shim=minode::DHTGetTemperature
+  export function airTemperatureReadValue(pin: ConnName): number {
     return 0;
   }
 
