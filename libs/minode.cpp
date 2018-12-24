@@ -26,15 +26,4 @@ namespace minode {
 
     	return dht_humidity;
   	}
-
-  	//%
-  	// void onDHTEvent(ConnName pin, Action body){
-   //  	int id;
-   //  	MiNodeDHT* pDHT11;
-
-   //  	pDHT11 = node.dht11.attach(pin);
-   //  	id = pDHT11->getId();
-
-   //  	registerWithDal(id, MINODE_DHT_EVT_CHANGE, body);
-  	// }
 }
