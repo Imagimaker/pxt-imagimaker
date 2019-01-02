@@ -128,13 +128,13 @@ namespace magibit {
   export function soundSensorReadValue(pin: SoundSensorPins): number {
     switch (pin) {
       case SoundSensorPins.P0:
-        return pins.analogReadPin(AnalogPin.P0);
+        return 1023-pins.analogReadPin(AnalogPin.P0);
       case SoundSensorPins.P1:
-        return pins.analogReadPin(AnalogPin.P1);
+        return 1023-pins.analogReadPin(AnalogPin.P1);
       case SoundSensorPins.P2:
-        return pins.analogReadPin(AnalogPin.P2);
+        return 1023-pins.analogReadPin(AnalogPin.P2);
       default:
-        return 0;
+        return 1023;
     }
   }
 
