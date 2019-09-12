@@ -173,19 +173,19 @@ namespace magibit {
     switch (pin) {
       case InfraredSensorPins.P0:
         pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P0);
+        return (1-pins.digitalReadPin(DigitalPin.P0));
       case InfraredSensorPins.P1:
         pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P1);
+        return (1-pins.digitalReadPin(DigitalPin.P1));
       case InfraredSensorPins.P2:
         pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P2);
+        return (1-pins.digitalReadPin(DigitalPin.P2));
       case InfraredSensorPins.P13:
         pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P13);
+        return (1-pins.digitalReadPin(DigitalPin.P13));
       case InfraredSensorPins.P16:
         pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P16);
+        return (1-pins.digitalReadPin(DigitalPin.P16));
       default:
         return 0;
     }
@@ -204,19 +204,19 @@ namespace magibit {
     switch (pin) {
       case InfraredSensorPins.P0:
         pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P0);
+        return (1-pins.digitalReadPin(DigitalPin.P0));
       case InfraredSensorPins.P1:
         pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P1);
+        return (1-pins.digitalReadPin(DigitalPin.P1));
       case InfraredSensorPins.P2:
         pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P2);
+        return (1-pins.digitalReadPin(DigitalPin.P2));
       case InfraredSensorPins.P13:
         pins.setPull(DigitalPin.P13, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P13);
+        return (1-pins.digitalReadPin(DigitalPin.P13));
       case InfraredSensorPins.P16:
         pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-        return pins.digitalReadPin(DigitalPin.P16);
+        return (1-pins.digitalReadPin(DigitalPin.P16));
       default:
         return 0;
     }
